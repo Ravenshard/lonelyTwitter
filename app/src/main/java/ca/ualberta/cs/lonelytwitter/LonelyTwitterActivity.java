@@ -1,3 +1,11 @@
+/*
+ * LonelyTwitterActivity
+ *
+ * January 31, 2018
+ *
+ * Copyright 2018 Team X
+ */
+
 package ca.ualberta.cs.lonelytwitter;
 
 import java.io.BufferedReader;
@@ -24,6 +32,14 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ *  The main method that controls the app.
+ *
+ *  @author Jay
+ *  @version 3.14159265358
+ *  @see NormalTweet
+ *  @see ImportantTweet
+ */
 public class LonelyTwitterActivity extends Activity {
 
 	private static final String FILENAME = "newfile.sav";
@@ -46,6 +62,11 @@ public class LonelyTwitterActivity extends Activity {
 
 		saveButton.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             * When the save button is pressed, save the changes and create a tweet
+             *
+             * @param v
+             */
 			public void onClick(View v) {
 				setResult(RESULT_OK);
 				String text = bodyText.getText().toString();
@@ -62,6 +83,11 @@ public class LonelyTwitterActivity extends Activity {
 
 		clearButton.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             * When the clear button is pressed, deletes everything and saves the changes
+             *
+             * @param v
+             */
 		    public void onClick(View v) {
 		        setResult(RESULT_OK);
 		        tweetlist.clear();
@@ -83,6 +109,9 @@ public class LonelyTwitterActivity extends Activity {
 		oldTweetsList.setAdapter(adapter);
 	}
 
+    /**
+     * Load the old data form file using Gson
+     */
 	private void loadFromFile() {
 
 		try {
@@ -99,16 +128,17 @@ public class LonelyTwitterActivity extends Activity {
 			tweetlist = gson.fromJson(in, listType);
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			tweetlist = new ArrayList<Tweet>();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            tweetlist = new ArrayList<Tweet>();
+        }
 
 	}
-	
+
+    /**
+     * Saves the information in the app to a file
+     *
+     */
 	private void saveInFile() {
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,
@@ -130,6 +160,9 @@ public class LonelyTwitterActivity extends Activity {
 		}
 	}
 
+    /**
+     * Destroy function logs a message when the app is closing     *
+     */
     protected void onDestroy(){
 	    super.onDestroy();
 	    Log.i("in Destroy method", "The app is closing");
