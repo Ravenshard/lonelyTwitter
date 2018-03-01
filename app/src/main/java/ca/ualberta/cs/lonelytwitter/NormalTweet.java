@@ -1,9 +1,17 @@
 package ca.ualberta.cs.lonelytwitter;
 
-public class NormalTweet extends Tweet {
+/**
+ * Created by dezfuli on 1/16/18.
+ */
+import java.util.Date;
 
-    public NormalTweet(String message) {
+public class NormalTweet extends Tweet {
+    NormalTweet(String message){
         super(message);
+    }
+
+    NormalTweet(String message, Date date){
+        super(message, date);
     }
 
     @Override
